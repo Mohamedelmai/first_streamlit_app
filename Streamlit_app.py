@@ -46,19 +46,27 @@ except URLError as e :
   streamlit.error()
 
 
-
-
-# stop
-streamlit.stop()
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
 # my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
-my_cur.execute("SELECT * from FRUIT_LOAD_LIST")
-my_data_row = my_cur.fetchall()
-streamlit.header("The fruit load list contain:")
-streamlit.dataframe(my_data_row)
 
 
+
+# ce block du code pour ajouter un button pour lister la les données d'une table snwoflake 
+
+def get_fruit_load_list():
+  with my_cnx.cursor() as my_cur:
+    my_cur.execute("SELECT * from FRUIT_LOAD_LIST")
+    return my_cur.fetchall()
+
+# add a button to load a fruit
+if streamlit.button('Get Fruit Load List'):
+  my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+  my_data_row=get_fruit_load_list()
+  streamlit.dataframe(my_data_row)
+  
+
+
+#stop
+streamlit.stop()
 
 # add a second text entry box 
 add_my_fruit = streamlit.text_input('What fruit would you like information about?')
