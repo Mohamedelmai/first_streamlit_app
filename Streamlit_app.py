@@ -52,3 +52,6 @@ streamlit.dataframe(my_data_row)
 add_my_fruit = streamlit.text_input('What fruit would you like information about?')
 streamlit.write('Thanks for adding', add_my_fruit)
 
+
+#this not will work correctly , but it just for the test
+my_cur.execute('insert into fruit_load_list values('from streamlit')')
