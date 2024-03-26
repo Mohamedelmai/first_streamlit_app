@@ -54,4 +54,4 @@ streamlit.write('Thanks for adding', add_my_fruit)
 
 
 #this not will work correctly , but it just for the test
-my_cur.execute('insert into fruit_load_list values('from streamlit')')
+my_cur.execute("insert into fruit_load_list values('from streamlit')")
